@@ -32,13 +32,14 @@ jobs:
 
       # 构建 Docker 镜像
       - name: Build Docker image
-        run: docker build -f ./docker/docker-cuda/Dockerfile \
-          --build-arg INSTALL_BNB=false \
-          --build-arg INSTALL_VLLM=false \
-          --build-arg INSTALL_DEEPSPEED=false \
-          --build-arg INSTALL_FLASHATTN=false \
-          --build-arg PIP_INDEX=https://pypi.org/simple \
-          -t ghcr.io/${{ env.image_name }}:latest .
+        run: |
+          docker build -f ./docker/docker-cuda/Dockerfile \
+            --build-arg INSTALL_BNB=false \
+            --build-arg INSTALL_VLLM=false \
+            --build-arg INSTALL_DEEPSPEED=false \
+            --build-arg INSTALL_FLASHATTN=false \
+            --build-arg PIP_INDEX=https://pypi.org/simple \
+            -t ghcr.io/${{ env.image_name }}:latest .
 
       # 推送 Docker 镜像到 GitHub Container Registry
       - name: Push Docker image
